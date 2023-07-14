@@ -8,21 +8,19 @@ const home = fs.readFileSync("home.html", "utf-8");
 
 const server = http
   .createServer((req, res) => {
-    console.log(req.url);
+    
     switch (req.url) {
       case "/":
-        res.setHeader("Content-Type","text/html");
+        res.setHeader("Content-Type", "text/html");
         res.end(header);
         break;
       case "/form":
-        res.setHeader("Content-Type","text/html");
+        res.setHeader("Content-Type", "text/html");
         res.end(home);
         break;
       default:
-        res.setHeader(404);
-        break;
+        res.writeHead(404);
+        res.end();
     }
-    res.writeHead(200, { "Content-Type": "text/html" });
-    res.end();
   })
   .listen(8080);
